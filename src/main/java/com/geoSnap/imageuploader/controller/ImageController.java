@@ -8,6 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
@@ -25,7 +26,9 @@ public class ImageController {
     }
 
     @PostMapping("/api/image/upload")
-    public String handleImageUpload(MultipartFile file, float latitude, float longitude) throws IOException {
+    public String handleImageUpload(@RequestParam("file") MultipartFile file,
+                                    @RequestParam("latitude") float latitude,
+                                    @RequestParam("longitude") float longitude) throws IOException {
         imageService.saveImage(file, latitude, longitude);
         return "redirect:/image";
     }

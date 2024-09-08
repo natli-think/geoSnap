@@ -6,6 +6,8 @@ import com.dropbox.core.v2.files.FileMetadata;
 import com.dropbox.core.v2.files.WriteMode;
 import com.geoSnap.imageuploader.model.Image;
 import com.geoSnap.imageuploader.repository.imageRepository;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -17,11 +19,13 @@ import java.util.List;
 
 @Service
 public class imageService {
-
+    private static final Logger logger = LoggerFactory.getLogger(imageService.class);
     @Autowired
     private imageRepository imageRepository;
     @Value("${dropbox.access.token}")
-    private String ACCESS_TOKEN;
+    private String ACCESS_TOKEN = "sl.B8gagkCyYS7PivuarIgBHA9LrITEmZbKKnU0f8VA53YCxs-0l77QnFxJzcjkitMgvAaNxqpLvn18-Icp8IcmiI8QUCCUluCOCKNEXkLTDWRhYGOZUurDny3N75NqrxbYfMxJDr7kq-6X9kRFtY1_RYc";
+
+
     public Image saveImage(MultipartFile file, Float latitude, Float longitude) throws IOException {
 
 
@@ -42,7 +46,7 @@ public class imageService {
             // Generate a shared link for the file
             uploadFile = client.sharing().createSharedLinkWithSettings(metadata.getPathLower()).getUrl();
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.error("Error uploading file to Dropbox", e);
             throw new IOException("Error uploading file to Dropbox", e);
         }
 
