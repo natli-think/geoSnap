@@ -3,25 +3,47 @@
 <head>
     <title>GeoSnap - Upload Image</title>
     <link rel="stylesheet" href="/css/styles.css">
+    <script>
+        function validateForm() {
+            const latitude = document.getElementById("latitude").value;
+            const longitude = document.getElementById("longitude").value;
+
+            if (latitude < -90 || latitude > 90) {
+                alert("Please enter a latitude value between -90 and 90.");
+                return false;
+            }
+            if (longitude < -180 || longitude > 180) {
+                alert("Please enter a longitude value between -180 and 180.");
+                return false;
+            }
+            return true;
+        }
+    </script>
 </head>
 <body>
-<h1>Upload Image</h1>
-<form action="#" th:action="@{/api/image/upload}" th:method="post" enctype="multipart/form-data">
-    <div>
-        <label for="file">Choose Image:</label>
-        <input type="file" id="file" name="file" required>
-    </div>
-    <div>
-        <label for="latitude">Latitude:</label>
-        <input type="text" id="latitude" name="latitude" placeholder="e.g., 40.7128" required>
-    </div>
-    <div>
-        <label for="longitude">Longitude:</label>
-        <input type="text" id="longitude" name="longitude" placeholder="e.g., -74.0060" required>
-    </div>
-    <div>
-        <button type="submit">Upload</button>
-    </div>
-</form>
+<div class="navbar">
+    <a href="/geoSnap">About</a>
+    <a href="/image">View All Images</a>
+</div>
+<div class="container">
+    <h1>Let's upload!</h1>
+    <form action="#" th:action="@{/api/image/upload}" th:method="post" enctype="multipart/form-data" onsubmit="return validateForm()">
+        <div>
+            <label for="file">Choose Image:</label>
+            <input type="file" id="file" name="file" required>
+        </div>
+        <div>
+            <label for="latitude">Latitude:</label>
+            <input type="number" id="latitude" name="latitude" placeholder="e.g., 40.7128" min="-90" max="90" step="0.0001" required>
+        </div>
+        <div>
+            <label for="longitude">Longitude:</label>
+            <input type="number" id="longitude" name="longitude" placeholder="e.g., -74.0060" min="-180" max="180" step="0.0001" required>
+        </div>
+        <div>
+            <button type="submit">Upload</button>
+        </div>
+    </form>
+</div>
 </body>
 </html>

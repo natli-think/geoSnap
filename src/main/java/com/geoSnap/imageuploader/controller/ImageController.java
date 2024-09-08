@@ -12,33 +12,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 
-//@RestController
-//@RequestMapping("/api/images")
-//public class imageController {
-//
-//    @Autowired
-//    private imageService imageService;
-//
-//    @PostMapping("/upload")
-//    public ResponseEntity<Image> uploadImage(@RequestParam("file") MultipartFile file,
-//                                             @RequestParam("latitude") Float latitude,
-//                                             @RequestParam("longitude") Float longitude) throws IOException {
-//        Image savedImage = imageService.saveImage(file, latitude, longitude);
-//        return ResponseEntity.ok(savedImage);
-//    }
-//
-//    @GetMapping
-//    public ResponseEntity<List<Image>> getAllImages() {
-//        return ResponseEntity.ok(imageService.getAllImages());
-//    }
-//
-//    @GetMapping("/{id}")
-//    public ResponseEntity<Image> getImageById(@PathVariable Long id) {
-//        return imageService.getImageById(id)
-//                .map(ResponseEntity::ok)
-//                .orElse(ResponseEntity.notFound().build());
-//    }
-//}
+
 @Controller
 public class ImageController {
 
@@ -70,6 +44,11 @@ public class ImageController {
         }
         model.addAttribute("image", image);
         return "view";
+    }
+
+    @GetMapping("/geoSnap")
+    public String returnInfo(){
+        return "about";
     }
 
 }
