@@ -7,6 +7,7 @@ import com.dropbox.core.v2.files.WriteMode;
 import com.geoSnap.imageuploader.model.Image;
 import com.geoSnap.imageuploader.repository.imageRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -19,25 +20,10 @@ public class imageService {
 
     @Autowired
     private imageRepository imageRepository;
-
+    @Value("${dropbox.access.token}")
+    private String ACCESS_TOKEN;
     public Image saveImage(MultipartFile file, Float latitude, Float longitude) throws IOException {
-        final String ACCESS_TOKEN = "sl.B8h3CMbSjj7ribhb2UdvCiV8hivA7cSuOz95kEWTnZBX8Nrf5TFdpq_q3JC725OgyJL2J9m9loGVMG4GRSyZEGD7PG9Nd_HUJQezeoyKPXlClvWuApXGiY7cIVDxmMEuwhER-o8abkfC-fUibADQlNM";
 
-//        // Get the project root directory
-//        String projectDir = System.getProperty("user.dir");
-//
-//        // Define the path to save the file
-//        File directory = new File(projectDir, "imageuploader/src/main/resources/static/images");
-//
-//        // Ensure directory exists
-//        if (!directory.exists()) {
-//            directory.mkdirs();
-//        }
-//
-//        // Define the file path
-//        String fileName = file.getOriginalFilename();
-//        File uploadFile = new File(directory, fileName);
-//        file.transferTo(uploadFile);
 
         // Initialize Dropbox client
         DbxRequestConfig config = DbxRequestConfig.newBuilder("dropbox/java-tutorial").build();
