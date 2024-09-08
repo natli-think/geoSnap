@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>GeoSnap - Upload Image</title>
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+<h1>Upload Image</h1>
+<form action="#" th:action="@{/api/image/upload}" th:method="post" enctype="multipart/form-data">
+    <div>
+        <label for="file">Choose Image:</label>
+        <input type="file" id="file" name="file" required>
+    </div>
+    <div>
+        <label for="latitude">Latitude:</label>
+        <input type="text" id="latitude" name="latitude" placeholder="e.g., 40.7128" required>
+    </div>
+    <div>
+        <label for="longitude">Longitude:</label>
+        <input type="text" id="longitude" name="longitude" placeholder="e.g., -74.0060" required>
+    </div>
+    <div>
+        <button type="submit">Upload</button>
+    </div>
+</form>
+</body>
+</html>
