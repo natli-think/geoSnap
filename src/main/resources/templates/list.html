@@ -5,13 +5,31 @@
   <link rel="stylesheet" href="/css/styles.css">
 </head>
 <body>
-<h1>Uploaded Images</h1>
-<ul>
-  <li th:each="image : ${imageList}">
-    <p th:text="${image.name}">Image Name</p>
-    <p th:text="'Location: ' + ${image.latitude} + ', ' + ${image.longitude}">Coordinates</p>
-    <img th:src="@{/images/{name}(name=${image.name})}" th:alt="${image.name}">
-  </li>
-</ul>
+<div class="navbar">
+  <a href="/geoSnap">About</a>
+  <a href="/upload">Upload Image</a>
+</div>
+<div class="container" style="width:100%">
+  <h1>Uploaded Images</h1>
+  <table>
+    <thead>
+    <tr>
+      <th>ID</th>
+      <th>Image</th>
+      <th>Latitude</th>
+      <th>Longitude</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="image : ${imageList}">
+      <td th:text="${image.id}">ID</td>
+      <td><img th:src="${#strings.replace(image.filePath, 'dl=0', 'raw=1')}" th:alt="${image.name}"></td>
+      <td th:text="${image.latitude}">Latitude</td>
+      <td th:text="${image.longitude}">Longitude</td>
+    </tr>
+    </tbody>
+  </table>
+</div>
+
 </body>
 </html>

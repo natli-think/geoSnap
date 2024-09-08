@@ -72,4 +72,9 @@ public class ImageController {
         return "view";
     }
 
+    @GetMapping("/geoSnap")
+    public String returnInfo(){
+        return "about";
+    }
+
 }

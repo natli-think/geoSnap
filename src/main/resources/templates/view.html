@@ -5,12 +5,17 @@
   <link rel="stylesheet" href="/css/styles.css">
 </head>
 <body>
-<h1>View Image</h1>
-<div>
+<div class="navbar">
+  <a href="/upload">Upload Image</a>
+  <a href="/image">View All Images</a>
+</div>
+
+<div class="container">
+  <h1>GeoSnap Image</h1>
   <h2 th:text="${image.name}">Image Name</h2>
   <p><strong>Location:</strong> <span th:text="${image.latitude}">Latitude</span>, <span th:text="${image.longitude}">Longitude</span></p>
-  <img th:src="@{/images/{name}(name=${image.name})}" th:alt="${image.name}">
+  <img th:src="${#strings.replace(image.filePath, 'dl=0', 'raw=1')}" th:alt="${image.name}">
 </div>
-<a href="/images">Back to Image List</a>
+
 </body>
 </html>
