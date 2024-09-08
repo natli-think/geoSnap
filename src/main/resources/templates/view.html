@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>GeoSnap - View Image</title>
+  <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+<h1>View Image</h1>
+<div>
+  <h2 th:text="${image.name}">Image Name</h2>
+  <p><strong>Location:</strong> <span th:text="${image.latitude}">Latitude</span>, <span th:text="${image.longitude}">Longitude</span></p>
+  <img th:src="@{/images/{name}(name=${image.name})}" th:alt="${image.name}">
+</div>
+<a href="/images">Back to Image List</a>
+</body>
+</html>
