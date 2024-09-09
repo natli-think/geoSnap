@@ -20,11 +20,18 @@ public class ImageController {
     @Autowired
     private imageService imageService;
 
+   /* API endpoint used to upload an image with metadata
+    * Usage: http://localhost:8080/upload
+    */
+
     @GetMapping("/upload")
     public String showUploadForm() {
         return "upload";
     }
 
+    /* API endpoint used within the application to upload.
+     * This will be redirected to the uploaded images with metadata.
+    */
     @PostMapping("/api/image/upload")
     public String handleImageUpload(@RequestParam("file") MultipartFile file,
                                     @RequestParam("latitude") float latitude,
@@ -33,12 +40,18 @@ public class ImageController {
         return "redirect:/image";
     }
 
+    /* API endpoint used to list  images with metadata
+     * Usage: http://localhost:8080/image
+    */
     @GetMapping("/image")
     public String listImages(Model model) {
         model.addAttribute("imageList", imageService.getAllImages());
         return "list";
     }
 
+    /* API endpoint used to fetch a single image by ID
+     * Usage: http://localhost:8080/image/12
+    */
     @GetMapping("/image/{id}")
     public String viewImageById(@PathVariable("id") Long id, Model model) {
         Image image = imageService.getImageById(id);
@@ -49,6 +62,9 @@ public class ImageController {
         return "view";
     }
 
+    /* API endpoint used as the landing page.
+     * Usage: http://localhost:8080/geoSnap
+    */
     @GetMapping("/geoSnap")
     public String returnInfo(){
         return "about";

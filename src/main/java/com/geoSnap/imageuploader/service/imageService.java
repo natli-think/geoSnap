@@ -23,9 +23,15 @@ public class imageService {
     @Autowired
     private imageRepository imageRepository;
     @Value("${dropbox.access.token}")
-    private String ACCESS_TOKEN = "sl.B8gagkCyYS7PivuarIgBHA9LrITEmZbKKnU0f8VA53YCxs-0l77QnFxJzcjkitMgvAaNxqpLvn18-Icp8IcmiI8QUCCUluCOCKNEXkLTDWRhYGOZUurDny3N75NqrxbYfMxJDr7kq-6X9kRFtY1_RYc";
+    private String ACCESS_TOKEN = "enter_token";
 
-
+    /* This function is used to save images to Dropbox as well as to the Database
+     * @param file : The image that is being uploaded by the user.
+     * @param latitude : The latitude input by the user.
+     * @param longitude : The longtitude input by the user.
+     * @return The method returns the image which has all the input details by the user along with filepath.
+     * @throws IOException If there is any error in uploading to Dropbox, then exception will be thrown
+    */
     public Image saveImage(MultipartFile file, Float latitude, Float longitude) throws IOException {
 
 
@@ -61,10 +67,17 @@ public class imageService {
         return imageRepository.save(image);
     }
 
+    /* This function is used to get all the images stored in the Database
+     * @return The method returns the List of Images
+     */
     public List<Image> getAllImages() {
         return imageRepository.findAll();
     }
 
+    /* This function is used to fetch a single image by ID
+     * @param id: The id of the image to be fetched.
+     * @return The method returns the Image with the mentioned ID
+     */
     public Image getImageById(Long id) {
         return imageRepository.findById(id).orElse(null);
     }
